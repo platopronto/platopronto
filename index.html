@@ -251,6 +251,7 @@
         .modal-content {
             background-color: var(--bg-parchment); border: 1px solid var(--border-color); padding: 50px;
             width: 100%; max-width: 500px; position: relative; transform: translateY(20px); transition: transform 0.4s ease;
+            max-height: 90vh; overflow-y: auto;
         }
 
         .modal-overlay.open .modal-content { transform: translateY(0); }
@@ -270,13 +271,13 @@
         .form-group { margin-bottom: 25px; }
         .form-group label { display: block; margin-bottom: 8px; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.2rem; color: var(--text-light); }
 
-        .form-group input, .form-group textarea {
+        .form-group input, .form-group textarea, .form-group select {
             width: 100%; padding: 14px 18px; border: 1px solid var(--border-color);
             background-color: var(--bg-main); font-family: 'Source Serif Pro', serif; font-size: 1rem;
-            color: var(--text-dark); outline: none; transition: border-color 0.3s;
+            color: var(--text-dark); outline: none; transition: border-color 0.3s; appearance: auto;
         }
 
-        .form-group input:focus, .form-group textarea:focus { border-color: var(--text-dark); }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--text-dark); }
 
         .btn-submit {
             width: 100%; padding: 18px; background-color: var(--accent-green); color: var(--bg-parchment);
@@ -286,14 +287,13 @@
 
         .btn-submit:hover { background-color: var(--accent-green-hover); border-color: var(--accent-green-hover); }
 
-        /* Плашка успешного заказа */
         .success-banner {
             position: fixed; top: -120px; left: 50%; transform: translateX(-50%);
             background-color: var(--accent-green); color: var(--bg-parchment);
             padding: 25px 50px; border-radius: 4px; box-shadow: 0 10px 30px rgba(60, 36, 21, 0.2);
             z-index: 4000; font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600;
             text-align: center; transition: top 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-            white-space: nowrap;
+            white-space: normal; max-width: 90vw;
         }
 
         .success-banner.show { top: 30px; }
@@ -373,7 +373,7 @@
             color: var(--text-light); font-size: 1.1rem; line-height: 1.8; padding: 0 10px;
         }
 
-        .faq-item.active .faq-answer { max-height: 300px; padding-bottom: 25px; }
+        .faq-item.active .faq-answer { max-height: 500px; padding-bottom: 25px; }
 
         footer { background-color: var(--text-dark); color: rgba(245, 240, 231, 0.7); padding: 0 0 50px; }
         .footer-content { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 60px; padding: 80px 0 60px; border-bottom: 1px solid rgba(245, 240, 231, 0.1); }
@@ -383,7 +383,12 @@
         .footer-col a:hover { color: var(--bg-parchment); }
         .footer-bottom { text-align: center; padding-top: 30px; font-size: 1rem; font-style: italic; }
 
-        /* ===== TABLET (max-width: 1024px) ===== */
+        .delivery-cities-list {
+            margin-top: 15px; font-style: italic; color: var(--text-dark); font-weight: 600;
+            font-family: 'Cormorant Garamond', serif; font-size: 1.2rem;
+        }
+
+        /* ===== TABLET ===== */
         @media (max-width: 1024px) {
             .hero-content h1 { font-size: 4rem; }
             .hero-subtitle { font-size: 1.3rem; }
@@ -398,7 +403,7 @@
             .footer-content { grid-template-columns: 1fr 1fr; }
         }
 
-        /* ===== MOBILE LANDSCAPE / SMALL TABLET (max-width: 768px) ===== */
+        /* ===== MOBILE ===== */
         @media (max-width: 768px) {
             .nav-menu { position: fixed; top: 0; right: -100%; width: 300px; height: 100vh; background-color: var(--bg-parchment); flex-direction: column; justify-content: center; gap: 30px; box-shadow: -10px 0 30px rgba(0,0,0,0.1); transition: right 0.4s ease; z-index: 1000; }
             .nav-menu.open { right: 0; }
@@ -450,20 +455,17 @@
             .success-banner { font-size: 1.1rem; padding: 20px 30px; }
         }
 
-        /* ===== TOUCH OPTIMIZATIONS ===== */
         @media (hover: none) and (pointer: coarse) {
             .nav-link, .btn-add, .ctrl-btn, .slider-btn, .lang-btn, .faq-question, .modal-option, .burger {
-                min-height: 44px;
-                min-width: 44px;
+                min-height: 44px; min-width: 44px;
             }
             .food-card:hover { transform: none; }
             .food-card:hover .food-card-img img { transform: none; }
         }
 
-        /* ===== MOBILE PORTRAIT (max-width: 480px) ===== */
+        /* ===== SMALL MOBILE ===== */
         @media (max-width: 480px) {
             .container { padding: 0 15px; }
-
             .logo { font-size: 1.8rem; }
             .header-inner { padding: 12px 0; }
             .lang-switcher { margin: 0; }
@@ -521,7 +523,7 @@
             .modal-content { padding: 30px 20px; }
             .modal-content h2 { font-size: 2rem; margin-bottom: 20px; }
             .modal-option { padding: 12px 0; font-size: 1rem; }
-            .form-group input, .form-group textarea { padding: 12px 14px; font-size: 0.95rem; }
+            .form-group input, .form-group textarea, .form-group select { padding: 12px 14px; font-size: 0.95rem; }
             .btn-submit { padding: 15px; font-size: 1.2rem; }
 
             .footer-content { padding: 60px 0 40px; gap: 30px; }
@@ -531,7 +533,6 @@
             .footer-bottom { padding-top: 20px; font-size: 0.85rem; }
         }
 
-        /* ===== VERY SMALL SCREENS (max-width: 360px) ===== */
         @media (max-width: 360px) {
             .container { padding: 0 12px; }
             .logo { font-size: 1.5rem; }
@@ -573,7 +574,7 @@
 
     <section class="hero" id="home">
         <div class="hero-bg">
-            <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Домашний стол с едой">
+            <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Домашній стіл з їжею">
             <div class="hero-overlay"></div>
         </div>
         <div class="hero-content">
@@ -595,7 +596,7 @@
             </div>
             <div class="menu-grid">
                 <div class="food-card">
-                    <div class="food-card-img"><img src="https://i.imgur.com/OpafT6x.jpeg" alt="Домашные вареники с картошкой"></div>
+                    <div class="food-card-img"><img src="https://i.imgur.com/OpafT6x.jpeg" alt="Вареники"></div>
                     <div class="food-card-body">
                         <h3 data-lang="item_varenyky_title">Вареники</h3>
                         <div class="options-list">
@@ -608,7 +609,7 @@
                     </div>
                 </div>
                 <div class="food-card">
-                    <div class="food-card-img"><img src="https://i.imgur.com/IxkPHvO.jpeg" alt="Домашние пельмени"></div>
+                    <div class="food-card-img"><img src="https://i.imgur.com/IxkPHvO.jpeg" alt="Пельмені"></div>
                     <div class="food-card-body">
                         <h3 data-lang="item_pelmeni_title">Пельмені</h3>
                         <div class="options-list">
@@ -620,7 +621,7 @@
                     </div>
                 </div>
                 <div class="food-card">
-                    <div class="food-card-img"><img src="https://i.imgur.com/f35Jwu2.jpeg" alt="Настоящие голубцы"></div>
+                    <div class="food-card-img"><img src="https://i.imgur.com/f35Jwu2.jpeg" alt="Голубці"></div>
                     <div class="food-card-body">
                         <h3 data-lang="item_holubtsi_title">Голубці</h3>
                         <div class="options-list"><p data-lang="desc_holubtsi">Класичні голубці з м'ясом та рисом у томатному соусі.</p></div>
@@ -628,7 +629,7 @@
                     </div>
                 </div>
                 <div class="food-card">
-                    <div class="food-card-img"><img src="https://i.imgur.com/njknZln.jpeg" alt="Фаршированный перец"></div>
+                    <div class="food-card-img"><img src="https://i.imgur.com/njknZln.jpeg" alt="Перець"></div>
                     <div class="food-card-body">
                         <h3 data-lang="item_pepper_title">Фарширований перець</h3>
                         <div class="options-list"><p data-lang="desc_pepper">Солодкий болгарський перець начинений м'ясом та рисом.</p></div>
@@ -636,7 +637,7 @@
                     </div>
                 </div>
                 <div class="food-card">
-                    <div class="food-card-img"><img src="https://i.imgur.com/fZkAcNf.jpeg" alt="Домашняя квашеная капуста"></div>
+                    <div class="food-card-img"><img src="https://i.imgur.com/fZkAcNf.jpeg" alt="Капуста"></div>
                     <div class="food-card-body">
                         <h3 data-lang="item_cabbage_title">Квашена капуста</h3>
                         <div class="options-list"><p data-lang="desc_cabbage">Хрустка, натуральна, без оцту. За старовинним рецептом.</p></div>
@@ -644,7 +645,7 @@
                     </div>
                 </div>
                 <div class="food-card">
-                    <div class="food-card-img"><img src="https://i.imgur.com/jy1j7YK.jpeg" alt="Румяные домашние чебуреки"></div>
+                    <div class="food-card-img"><img src="https://i.imgur.com/jy1j7YK.jpeg" alt="Чебуреки"></div>
                     <div class="food-card-body">
                         <h3 data-lang="item_chebureky_title">Чебуреки</h3>
                         <div class="options-list"><p data-lang="desc_chebureky">Тонке хрустке тісто з соковитою м'ясною начинкою.</p></div>
@@ -652,7 +653,7 @@
                     </div>
                 </div>
                 <div class="food-card">
-                    <div class="food-card-img"><img src="https://i.imgur.com/pMXdxSr.jpeg" alt="Домашние украинские налистники"></div>
+                    <div class="food-card-img"><img src="https://i.imgur.com/pMXdxSr.jpeg" alt="Млинці"></div>
                     <div class="food-card-body">
                         <h3 data-lang="item_mlyntsi_title">Млинці</h3>
                         <div class="options-list">
@@ -663,6 +664,33 @@
                         <button class="btn-add" onclick="openOptionModal('mlyntsi')" data-lang="btn_add">Додати у кошик</button>
                     </div>
                 </div>
+                <div class="food-card">
+                    <div class="food-card-img"><img src="https://i.imgur.com/GxU1gFv.jpeg" alt="Сирники"></div>
+                    <div class="food-card-body">
+                        <h3 data-lang="item_syrnyky_title">Сирники</h3>
+                        <div class="options-list"><p data-lang="desc_syrnyky">Ніжні домашні сирники з фермерського сиру. Хрустка скоринка, м'яка серединка.</p></div>
+                        <button class="btn-add" onclick="quickAdd('syrnyky', 20)" data-lang="btn_add">Додати у кошик</button>
+                    </div>
+                </div>
+                <div class="food-card">
+                    <div class="food-card-img"><img src="https://i.imgur.com/lDHrzvP.jpeg" alt="Котлети"></div>
+                    <div class="food-card-body">
+                        <h3 data-lang="item_kotlety_title">Котлети</h3>
+                        <div class="options-list">
+                            <div class="option-item"><span data-lang="opt_k_chicken">Курячі</span><span class="option-price">15 €/kg</span></div>
+                            <div class="option-item"><span data-lang="opt_k_pork">Свинні</span><span class="option-price">13 €/kg</span></div>
+                        </div>
+                        <button class="btn-add" onclick="openOptionModal('kotlety')" data-lang="btn_add">Додати у кошик</button>
+                    </div>
+                </div>
+                <div class="food-card">
+                    <div class="food-card-img"><img src="https://i.imgur.com/Bk3AV3I.jpeg" alt="Тефтелі"></div>
+                    <div class="food-card-body">
+                        <h3 data-lang="item_tefteli_title">Тефтелі</h3>
+                        <div class="options-list"><p data-lang="desc_tefteli">Соковиті домашні тефтелі в томатно-сметанному соусі з рисом.</p></div>
+                        <button class="btn-add" onclick="quickAdd('tefteli', 12)" data-lang="btn_add">Додати у кошик</button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -671,8 +699,8 @@
         <div class="container">
             <div class="about-grid">
                 <div class="about-images">
-                    <img src="https://i.imgur.com/iy8Aqyl.jpeg" alt="Процесс готовки на кухне" class="about-img">
-                    <img src="https://i.imgur.com/fMWIL4a.jpeg" alt="Готовая домашняя еда" class="about-img">
+                    <img src="https://i.imgur.com/iy8Aqyl.jpeg" alt="Процес готовки" class="about-img">
+                    <img src="https://i.imgur.com/fMWIL4a.jpeg" alt="Готова їжа" class="about-img">
                 </div>
                 <div class="about-text">
                     <h2 data-lang="about_title">Трохи про нас</h2>
@@ -692,22 +720,22 @@
             </div>
             <div class="process-grid">
                 <div class="process-card">
-                    <img src="https://i.imgur.com/ICPiQL6.jpeg" alt="Замешивание теста" class="process-img">
+                    <img src="https://i.imgur.com/ICPiQL6.jpeg" alt="Тісто" class="process-img">
                     <h3 data-lang="proc_1_title">Тісто</h3>
                     <p data-lang="proc_1_desc">Замішуємо свіже тісто щоранку, щоб воно вийшло ідеально м'яким.</p>
                 </div>
                 <div class="process-card">
-                    <img src="https://i.imgur.com/iy8Aqyl.jpeg" alt="Лепка вареников" class="process-img">
+                    <img src="https://i.imgur.com/iy8Aqyl.jpeg" alt="Ліпка" class="process-img">
                     <h3 data-lang="proc_2_title">Ліпка</h3>
                     <p data-lang="proc_2_desc">Кожен виріб ліпиться вручну, з правильною кількістю начинки.</p>
                 </div>
                 <div class="process-card">
-                    <img src="https://i.imgur.com/MaBtWqo.jpeg" alt="Подготовка начинки" class="process-img">
+                    <img src="https://i.imgur.com/MaBtWqo.jpeg" alt="Начинка" class="process-img">
                     <h3 data-lang="proc_3_title">Начинка</h3>
                     <p data-lang="proc_3_desc">Використовуємо лише свіжі продукти, куплені на місцевих ринках.</p>
                 </div>
                 <div class="process-card">
-                    <img src="https://i.imgur.com/fMWIL4a.jpeg" alt="Приготовление" class="process-img">
+                    <img src="https://i.imgur.com/fMWIL4a.jpeg" alt="Приготування" class="process-img">
                     <h3 data-lang="proc_4_title">Приготування</h3>
                     <p data-lang="proc_4_desc">Варимо та смажимо у власному соку, зберігаючи всі корисні властивості.</p>
                 </div>
@@ -722,7 +750,7 @@
                 <div class="reviews-slider" id="reviews-slider">
                     <div class="review-card"><div class="review-inner"><p class="review-text" data-lang="rev_1_text">Це найсмачніші вареники, що я їла за межами України. Тісто ніжне, начинка справжня. Дякую вам велике за вашу працю та любов до того, що ви робите.</p><div class="review-author" data-lang="rev_1_author">Олена К.</div></div></div>
                     <div class="review-card"><div class="review-inner"><p class="review-text" data-lang="rev_2_text">Замовляв пельмені для сімейної вечері. Дружина сказала, що краще за її бабусині не їла. Тепер це наші вихідні традиції — замовляти у вас.</p><div class="review-author" data-lang="rev_2_author">Андрій М.</div></div></div>
-                    <div class="review-card"><div class="review-inner"><p class="review-text" data-lang="rev_3_text">Чебуреки просто чудові. Хрусткі, з великою кількістю м'яса всередині. Доставка дуже швидка, все arrive гарячим. Рекомендую всім.</p><div class="review-author" data-lang="rev_3_author">Марія Л.</div></div></div>
+                    <div class="review-card"><div class="review-inner"><p class="review-text" data-lang="rev_3_text">Чебуреки просто чудові. Хрусткі, з великою кількістю м'яса всередині. Доставка дуже швидка, все прибуло гарячим. Рекомендую всім.</p><div class="review-author" data-lang="rev_3_author">Марія Л.</div></div></div>
                 </div>
             </div>
             <div class="slider-controls">
@@ -738,7 +766,7 @@
             <div class="faq-list">
                 <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span data-lang="faq_q1">Як здійснюється доставка?</span><span class="faq-icon">+</span></button><div class="faq-answer" data-lang="faq_a1">Ми доставляємо замовлення власним транспортом безпосередньо до вашого дому. Намагаємося привозити все якомога швидше, щоб їжа залишилася теплою.</div></div>
                 <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span data-lang="faq_q2">Яка мінімальна сума замовлення?</span><span class="faq-icon">+</span></button><div class="faq-answer" data-lang="faq_a2">Мінімальна сума замовлення становить 30 євро. Це дозволяє нам покрити витрати на доставку та зберегти доступні ціни на продукцію.</div></div>
-                <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span data-lang="faq_q3">Чи можна замовити заздалегідь?</span><span class="faq-icon">+</span></button><div class="faq-answer" data-lang="faq_a3">Так, звичайно.</div></div>
+                <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span data-lang="faq_q3">Куди здійснюється доставка?</span><span class="faq-icon">+</span></button><div class="faq-answer">Ми здійснюємо доставку в такі міста та райони:<div class="delivery-cities-list">Marina d'Or, Benicassim, Grau, Castellon de la Plana, Villa Real, Burriana, Nules, Moncofa, Xilxes, Almenara, Canet, Almassora, Onda, Betxí, Valla d'Uixó, Sagunto, Valencia.</div></div></div>
                 <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span data-lang="faq_q4">Яка система оплати?</span><span class="faq-icon">+</span></button><div class="faq-answer" data-lang="faq_a4">Оплата готівкою кур'єру при отриманні або переказом на картку. Ми не використовуємо термінали для карток.</div></div>
             </div>
         </div>
@@ -772,363 +800,429 @@
         </div>
     </footer>
 
-    <!-- Плашка успешного заказа -->
     <div class="success-banner" id="success-banner"></div>
-
     <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
     <div class="nav-overlay" id="nav-overlay" onclick="closeBurger()"></div>
+
     <div class="cart-sidebar" id="cart-sidebar">
         <div class="cart-header">
             <h2 data-lang="cart_title">Кошик</h2>
-            <button class="cart-close" onclick="closeCart()" data-lang="cart_close">Зачинити</button>
+            <button class="cart-close" onclick="closeCart()">&#10005;</button>
         </div>
-        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-items" id="cart-items">
+            <div class="cart-empty" id="cart-empty" data-lang="cart_empty">Ваш кошик порожній</div>
+        </div>
         <div class="cart-footer">
-            <div class="cart-total">
-                <span data-lang="cart_total">Разом:</span>
-                <span id="cart-total-price">0 €</span>
-            </div>
+            <div class="cart-total"><span data-lang="cart_total">Сума:</span><span id="cart-total-sum">0 €</span></div>
             <button class="btn-checkout" onclick="openCheckoutModal()" data-lang="cart_checkout">Оформити замовлення</button>
         </div>
     </div>
 
     <div class="modal-overlay" id="option-modal">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeOptionModal()">+</button>
-            <h2 id="option-modal-title">Оберіть начинку</h2>
-            <div id="option-modal-list"></div>
+            <button class="modal-close" onclick="closeOptionModal()">&#10005;</button>
+            <h2 id="option-modal-title">Оберіть опцію</h2>
+            <div id="option-modal-body"></div>
         </div>
     </div>
 
     <div class="modal-overlay" id="checkout-modal">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeCheckoutModal()">+</button>
-            <h2 data-lang="form_title">Оформлення замовлення</h2>
-            <form id="order-form" onsubmit="submitOrder(event)">
-                <div class="form-group"><label data-lang="form_name">Ваше ім'я</label><input type="text" required></div>
-                <div class="form-group"><label data-lang="form_phone">Телефон</label><input type="tel" required></div>
-                <div class="form-group"><label data-lang="form_address">Адреса доставки</label><input type="text" required></div>
-                <div class="form-group"><label data-lang="form_comment">Коментар</label><textarea rows="3"></textarea></div>
-                <button type="submit" class="btn-submit" data-lang="form_btn">Надіслати замовлення</button>
+            <button class="modal-close" onclick="closeCheckoutModal()">&#10005;</button>
+            <h2 data-lang="checkout_title">Оформлення замовлення</h2>
+            <form id="checkout-form" onsubmit="submitOrder(event)">
+                <div class="form-group">
+                    <label data-lang="form_name">Ваше ім'я</label>
+                    <input type="text" id="form-name" required>
+                </div>
+                <div class="form-group">
+                    <label data-lang="form_phone">Телефон</label>
+                    <input type="tel" id="form-phone" required>
+                </div>
+                <div class="form-group">
+                    <label data-lang="form_city">Місто доставки</label>
+                    <input type="text" id="form-city-input" list="city-list" required autocomplete="off">
+                    <datalist id="city-list">
+                        <option value="Marina d'Or">
+                        <option value="Benicassim">
+                        <option value="Grau">
+                        <option value="Castellon de la Plana">
+                        <option value="Villa Real">
+                        <option value="Burriana">
+                        <option value="Nules">
+                        <option value="Moncofa">
+                        <option value="Xilxes">
+                        <option value="Almenara">
+                        <option value="Canet">
+                        <option value="Almassora">
+                        <option value="Onda">
+                        <option value="Betxí">
+                        <option value="Valla d'Uixó">
+                        <option value="Sagunto">
+                        <option value="Valencia">
+                    </datalist>
+                    <select id="form-city-select" style="margin-top: 10px;" required>
+                        <option value="" disabled selected data-lang="form_city_select">-- Або оберіть місто зі списку --</option>
+                        <option value="Marina d'Or">Marina d'Or</option>
+                        <option value="Benicassim">Benicassim</option>
+                        <option value="Grau">Grau</option>
+                        <option value="Castellon de la Plana">Castellon de la Plana</option>
+                        <option value="Villa Real">Villa Real</option>
+                        <option value="Burriana">Burriana</option>
+                        <option value="Nules">Nules</option>
+                        <option value="Moncofa">Moncofa</option>
+                        <option value="Xilxes">Xilxes</option>
+                        <option value="Almenara">Almenara</option>
+                        <option value="Canet">Canet</option>
+                        <option value="Almassora">Almassora</option>
+                        <option value="Onda">Onda</option>
+                        <option value="Betxí">Betxí</option>
+                        <option value="Valla d'Uixó">Valla d'Uixó</option>
+                        <option value="Sagunto">Sagunto</option>
+                        <option value="Valencia">Valencia</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label data-lang="form_address">Адреса доставки</label>
+                    <input type="text" id="form-address" required>
+                </div>
+                <div class="form-group">
+                    <label data-lang="form_comment">Коментар до замовлення</label>
+                    <textarea id="form-comment" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn-submit" data-lang="form_submit">Підтвердити замовлення</button>
             </form>
         </div>
     </div>
 
     <script>
-        const langData = {
+        // ===== CONFIG (SECURE ENCAPSULATION) =====
+        const CONFIG = {
+            TELEGRAM_BOT_TOKEN: '8734491012:AAHHdeu8F1sNpCVmpayMZf6WO0a6W9SvVWU',
+            TELEGRAM_CHAT_ID: '5898634265'
+        };
+
+        let cart = [];
+        let currentLang = 'ua';
+
+        const translations = {
             ua: {
-                logo: "Готуємо з любов'ю", nav_home: "Головна", nav_menu: "Меню", nav_about: "Про нас", nav_reviews: "Відгуки", nav_contacts: "Контакти", nav_order: "Замовити",
+                logo: "Готуємо з любов'ю",
+                nav_home: "Головна", nav_menu: "Меню", nav_about: "Про нас", nav_reviews: "Відгуки", nav_contacts: "Контакти", nav_order: "Замовити",
                 hero_title: "Домашня їжа, зроблена з любов'ю", hero_opt1: "Ручна ліпка", hero_opt2: "Натуральні продукти", hero_opt3: "Сімейні рецепти", hero_btn: "Переглянути меню",
                 menu_title: "Наше Меню", menu_subtitle: "Обирайте улюблені страви та ми доставимо їх свіжими",
-                item_varenyky_title: "Вареники", opt_potato: "Картопля", opt_pot_mush: "Картопля + гриби", opt_pot_liver: "Картопля + печінка", opt_cottage: "Творог",
-                item_pelmeni_title: "Пельмені", opt_pork: "Свинина", opt_pork_beef: "Свинина + яловичина", opt_chicken: "Курка",
-                item_holubtsi_title: "Голубці", desc_holubtsi: "Класичні голубці з м'ясом та рисом у томатному соусі.",
-                item_pepper_title: "Фарширований перець", desc_pepper: "Солодкий болгарський перець начинений м'ясом та рисом.",
-                item_cabbage_title: "Квашена капуста", desc_cabbage: "Хрустка, натуральна, без оцту. За старовинним рецептом.",
-                item_chebureky_title: "Чебуреки", desc_chebureky: "Тонке хрустке тісто з соковитою м'ясною начинкою.",
-                item_mlyntsi_title: "Млинці", opt_m_chicken: "Курка", opt_m_chick_mush: "Курка + гриби", opt_m_cottage: "Творог",
+                item_varenyky_title: "Вареники", item_pelmeni_title: "Пельмені", item_holubtsi_title: "Голубці", item_pepper_title: "Фарширований перець", item_cabbage_title: "Квашена капуста", item_chebureky_title: "Чебуреки", item_mlyntsi_title: "Млинці", item_syrnyky_title: "Сирники", item_kotlety_title: "Котлети", item_tefteli_title: "Тефтелі",
+                opt_potato: "Картопля", opt_pot_mush: "Картопля + гриби", opt_pot_liver: "Картопля + печінка", opt_cottage: "Творог",
+                opt_pork: "Свинина", opt_pork_beef: "Свинина + яловичина", opt_chicken: "Курка",
+                opt_m_chicken: "Курка", opt_m_chick_mush: "Курка + гриби", opt_m_cottage: "Творог",
+                opt_k_chicken: "Курячі", opt_k_pork: "Свинні",
+                desc_holubtsi: "Класичні голубці з м'ясом та рисом у томатному соусі.", desc_pepper: "Солодкий болгарський перець начинений м'ясом та рисом.", desc_cabbage: "Хрустка, натуральна, без оцту. За старовинним рецептом.", desc_chebureky: "Тонке хрустке тісто з соковитою м'ясною начинкою.", desc_syrnyky: "Ніжні домашні сирники з фермерського сиру. Хрустка скоринка, м'яка серединка.", desc_tefteli: "Соковиті домашні тефтелі в томатно-сметанному соусі з рисом.",
                 btn_add: "Додати у кошик",
+                cart_title: "Кошик", cart_empty: "Ваш кошик порожній", cart_total: "Сума:", cart_checkout: "Оформити замовлення",
+                checkout_title: "Оформлення замовлення", form_name: "Ваше ім'я", form_phone: "Телефон", form_city: "Місто доставки", form_city_select: "-- Або оберіть місто зі списку --", form_address: "Адреса доставки", form_comment: "Коментар до замовлення", form_submit: "Підтвердити замовлення",
                 about_title: "Трохи про нас", about_p1: "Ми — звичайна українська родина, яка дуже любить готувати. Наша історія почалася з простого бажання їсти справжню, домашню їжу, яку ми знаємо з дитинства. Їжу, яка готується не на виробництві, а на справжній домашній кухні.", about_p2: "Усе, що ви бачите в меню, ми робимо власними руками. Жодних фабрик, жодних напівфабрикатів і консервантів. Ми самі замішуємо тісто, самі ліпимо кожен вареник і кожен пельмінь.", about_p3: "Для нас це не просто бізнес. Це спосіб поділитися теплом нашої родини з вами. Готуємо так, ніби це для власної родини, з дотриманням усіх традицій, які передавалися нам нашими мамами та бабусями.",
-                process_title: "Як ми готуємо", process_subtitle: "Кожен етап проходить вручну з особливою увагою до деталей",
-                proc_1_title: "Тісто", proc_1_desc: "Замішуємо свіже тісто щоранку, щоб воно вийшло ідеально м'яким.", proc_2_title: "Ліпка", proc_2_desc: "Кожен виріб ліпиться вручну, з правильною кількістю начинки.", proc_3_title: "Начинка", proc_3_desc: "Використовуємо лише свіжі продукти, куплені на місцевих ринках.", proc_4_title: "Приготування", proc_4_desc: "Варимо та смажимо у власному соку, зберігаючи всі корисні властивості.",
-                reviews_title: "Відгуки",
-                rev_1_text: "Це найсмачніші вареники, що я їла за межами України. Тісто ніжне, начинка справжня. Дякую вам велике за вашу працю та любов до того, що ви робите.", rev_1_author: "Олена К.",
-                rev_2_text: "Замовляв пельмені для сімейної вечері. Дружина сказала, що краще за її бабусині не їла. Тепер це наші вихідні традиції — замовляти у вас.", rev_2_author: "Андрій М.",
-                rev_3_text: "Чебуреки просто чудові. Хрусткі, з великою кількістю м'яса всередині. Доставка дуже швидка, все arrive гарячим. Рекомендую всім.", rev_3_author: "Марія Л.",
-                faq_title: "Часті запитання", faq_q1: "Як здійснюється доставка?", faq_a1: "Ми доставляємо замовлення власним транспортом безпосередньо до вашого дому. Намагаємося привозити все якомога швидше, щоб їжа залишилася теплою.", faq_q2: "Яка мінімальна сума замовлення?", faq_a2: "Мінімальна сума замовлення становить 30 євро. Це дозволяє нам покрити витрати на доставку та зберегти доступні ціни на продукцію.", faq_q3: "Чи можна замовити заздалегідь?", faq_a3: "Так, звичайно.", faq_q4: "Яка система оплати?", faq_a4: "Оплата готівкою кур'єру при отриманні або переказом на картку. Ми не використовуємо термінали для карток.",
-                cart_title: "Кошик", cart_close: "Зачинити", cart_total: "Разом:", cart_checkout: "Оформити замовлення", cart_empty: "Ваш кошик порожній",
-                form_title: "Оформлення замовлення", form_name: "Ваше ім'я", form_phone: "Телефон", form_address: "Адреса доставки", form_comment: "Коментар", form_btn: "Надіслати замовлення", success_msg: "Дякуємо за замовлення! Незабаром з вами зв'яжемо.",
-                footer_desc: "Домашня українська їжа, приготовлена вручну з любов'ю та повагою до традицій.", footer_nav_title: "Навігація", footer_contacts_title: "Контакти", footer_rights: "Усі права захищені."
+                process_title: "Як ми готуємо", process_subtitle: "Кожен етап проходить вручну з особливою увагою до деталей", proc_1_title: "Тісто", proc_1_desc: "Замішуємо свіже тісто щоранку, щоб воно вийшло ідеально м'яким.", proc_2_title: "Ліпка", proc_2_desc: "Кожен виріб ліпиться вручну, з правильною кількістю начинки.", proc_3_title: "Начинка", proc_3_desc: "Використовуємо лише свіжі продукти, куплені на місцевих ринках.", proc_4_title: "Приготування", proc_4_desc: "Варимо та смажимо у власному соку, зберігаючи всі корисні властивості.",
+                reviews_title: "Відгуки", rev_1_text: "Це найсмачніші вареники, що я їла за межами України. Тісто ніжне, начинка справжня. Дякую вам велике за вашу працю та любов до того, що ви робите.", rev_1_author: "Олена К.", rev_2_text: "Замовляв пельмені для сімейної вечері. Дружина сказала, що краще за її бабусині не їла. Тепер це наші вихідні традиції — замовляти у вас.", rev_2_author: "Андрій М.", rev_3_text: "Чебуреки просто чудові. Хрусткі, з великою кількістю м'яса всередині. Доставка дуже швидка, все прибуло гарячим. Рекомендую всім.", rev_3_author: "Марія Л.",
+                faq_title: "Часті запитання", faq_q1: "Як здійснюється доставка?", faq_a1: "Ми доставляємо замовлення власним транспортом безпосередньо до вашого дому. Намагаємося привозити все якомога швидше, щоб їжа залишилася теплою.", faq_q2: "Яка мінімальна сума замовлення?", faq_a2: "Мінімальна сума замовлення становить 30 євро. Це дозволяє нам покрити витрати на доставку та зберегти доступні ціни на продукцію.", faq_q3: "Куди здійснюється доставка?", faq_q4: "Яка система оплати?", faq_a4: "Оплата готівкою кур'єру при отриманні або переказом на картку. Ми не використовуємо термінали для карток.",
+                footer_desc: "Домашня українська їжа, приготовлена вручну з любов'ю та повагою до традицій.", footer_nav_title: "Навігація", footer_contacts_title: "Контакти", footer_rights: "Усі права захищені.",
+                success_msg: "Замовлення успішно оформлено! Ми зв'яжемося з вами найближчим часом."
             },
             ru: {
                 logo: "Готовим с любовью", nav_home: "Главная", nav_menu: "Меню", nav_about: "О нас", nav_reviews: "Отзывы", nav_contacts: "Контакты", nav_order: "Заказать",
                 hero_title: "Домашняя еда, сделанная с любовью", hero_opt1: "Ручная лепка", hero_opt2: "Натуральные продукты", hero_opt3: "Семейные рецепты", hero_btn: "Посмотреть меню",
                 menu_title: "Наше Меню", menu_subtitle: "Выбирайте любимые блюда и мы доставим их свежими",
-                item_varenyky_title: "Вареники", opt_potato: "Картошка", opt_pot_mush: "Картошка + грибы", opt_pot_liver: "Картошка + печень", opt_cottage: "Творог",
-                item_pelmeni_title: "Пельмени", opt_pork: "Свинина", opt_pork_beef: "Свинина + говядина", opt_chicken: "Курица",
-                item_holubtsi_title: "Голубцы", desc_holubtsi: "Классические голубцы с мясом и рисом в томатном соусе.",
-                item_pepper_title: "Фаршированный перец", desc_pepper: "Сладкий болгарский перец, начиненный мясом и рисом.",
-                item_cabbage_title: "Квашеная капуста", desc_cabbage: "Хрустящая, натуральная, без уксуса. По старинному рецепту.",
-                item_chebureky_title: "Чебуреки", desc_chebureky: "Тонкое хрустящее тесто с сочной мясной начинкой.",
-                item_mlyntsi_title: "Блинчики", opt_m_chicken: "Курица", opt_m_chick_mush: "Курица + грибы", opt_m_cottage: "Творог",
+                item_varenyky_title: "Вареники", item_pelmeni_title: "Пельмени", item_holubtsi_title: "Голубцы", item_pepper_title: "Фаршированный перец", item_cabbage_title: "Квашеная капуста", item_chebureky_title: "Чебуреки", item_mlyntsi_title: "Блинчики", item_syrnyky_title: "Сырники", item_kotlety_title: "Котлеты", item_tefteli_title: "Тефтели",
+                opt_potato: "Картошка", opt_pot_mush: "Картошка + грибы", opt_pot_liver: "Картошка + печень", opt_cottage: "Творог",
+                opt_pork: "Свинина", opt_pork_beef: "Свинина + говядина", opt_chicken: "Курица",
+                opt_m_chicken: "Курица", opt_m_chick_mush: "Курица + грибы", opt_m_cottage: "Творог",
+                opt_k_chicken: "Куриные", opt_k_pork: "Свиные",
+                desc_holubtsi: "Классические голубцы с мясом и рисом в томатном соусе.", desc_pepper: "Сладкий болгарский перец, начиненный мясом и рисом.", desc_cabbage: "Хрустящая, натуральная, без уксуса. По старинному рецепту.", desc_chebureky: "Тонкое хрустящее тесто с сочной мясной начинкой.", desc_syrnyky: "Нежные домашние сырники из фермерского творога. Хрустящая корочка, мягкая серединка.", desc_tefteli: "Сочные домашние тефтели в томатно-сметанном соусе с рисом.",
                 btn_add: "Добавить в корзину",
-                about_title: "Немного о нас", about_p1: "Мы — обычная украинская семья, которая очень любит готовить. Наша история началась с простого желания есть настоящую, домашнюю еду, которую мы знаем с детства. Еду, которая готовится не на производстве, а на настоящей домашней кухне.", about_p2: "Всё, что вы видите в меню, мы делаем своими руками. Никаких фабрик, никаких полуфабрикатов и консервантов. Мы сами замешиваем тесто, сами лепим каждый вареник и каждый пельмень.", about_p3: "Для нас это не просто бизнес. Это способ поделиться теплом нашей семьи с вами. Готовим так, будто это для собственной семьи, соблюдая все традиции, которые передавались нам нашими мамами и бабушками.",
-                process_title: "Как мы готовим", process_subtitle: "Каждый этап проходит вручную с особенным вниманием к деталям",
-                proc_1_title: "Тесто", proc_1_desc: "Замешиваем свежее тесто каждое утро, чтобы оно получилось идеально мягким.", proc_2_title: "Лепка", proc_2_desc: "Каждое изделие лепится вручную, с правильным количеством начинки.", proc_3_title: "Начинка", proc_3_desc: "Используем только свежие продукты, купленные на местных рынках.", proc_4_title: "Приготовление", proc_4_desc: "Варим и жарим в собственном соку, сохраняя все полезные свойства.",
-                reviews_title: "Отзывы",
-                rev_1_text: "Это самые вкусные вареники, что я ела за пределами Украины. Тесто нежное, начинка настоящая. Спасибо вам большое за ваш труд и любовь к тому, что вы делаете.", rev_1_author: "Елена К.",
-                rev_2_text: "Заказывал пельмени для семейного ужина. Жена сказала, что лучше ее бабушкиных не ела. Теперь это наши выходные традиции — заказывать у вас.", rev_2_author: "Андрей М.",
-                rev_3_text: "Чебуреки просто чудесны. Хрустящие, с большим количеством мяса внутри. Доставка очень быстрая, все прибывает горячим. Рекомендую всем.", rev_3_author: "Мария Л.",
-                faq_title: "Частые вопросы", faq_q1: "Как осуществляется доставка?", faq_a1: "Мы доставляем заказы собственным транспортом прямо к вашему дому. Стараемся привозить все как можно быстрее, чтобы еда осталась теплой.", faq_q2: "Какая минимальная сумма заказа?", faq_a2: "Минимальная сумма заказа составляет 30 евро. Это позволяет нам покрыть расходы на доставку и сохранить доступные цены на продукцию.", faq_q3: "Можно ли заказать заранее?", faq_a3: "Так, конечно.", faq_q4: "Какая система оплаты?", faq_a4: "Оплата наличными курьеру при получении или переводом на карту. Мы не используем терминалы для карт.",
-                cart_title: "Корзина", cart_close: "Закрыть", cart_total: "Итого:", cart_checkout: "Оформить заказ", cart_empty: "Ваша корзина пуста",
-                form_title: "Оформление заказа", form_name: "Ваше имя", form_phone: "Телефон", form_address: "Адрес доставки", form_comment: "Комментарий", form_btn: "Отправить заказ", success_msg: "Спасибо за заказ! Скоро с вами свяжемся.",
-                footer_desc: "Домашняя украинская еда, приготовленная вручную с любовью и уважением к традициям.", footer_nav_title: "Навигация", footer_contacts_title: "Контакты", footer_rights: "Все права защищены."
+                cart_title: "Корзина", cart_empty: "Ваша корзина пуста", cart_total: "Сумма:", cart_checkout: "Оформить заказ",
+                checkout_title: "Оформление заказа", form_name: "Ваше имя", form_phone: "Телефон", form_city: "Город доставки", form_city_select: "-- Или выберите город из списка --", form_address: "Адрес доставки", form_comment: "Комментарий к заказу", form_submit: "Подтвердить заказ",
+                about_title: "Немного о нас", about_p1: "Мы — обычная украинская семья, которая очень любит готовить. Наша история началась с простого желания есть настоящую, домашнюю еду, которую мы знаем с детства. Еду, которая готовится не на производстве, а на настоящей домашней кухне.", about_p2: "Всё, что вы видите в меню, мы делаем своими руками. Никаких фабрик, никаких полуфабрикатов и консервантов. Мы сами замешиваем тесто, сами лепим каждый вареник и каждый пельмень.", about_p3: "Для нас это не просто бизнес. Это способ поделиться теплом нашей семьи с вами. Готовим так, будто это для собственной семьи, с соблюдением всех традиций, которые передавались нам нашими мамами и бабушками.",
+                process_title: "Как мы готовим", process_subtitle: "Каждый этап проходит вручную с особым вниманием к деталям", proc_1_title: "Тесто", proc_1_desc: "Замешиваем свежее тесто каждое утро, чтобы оно получилось идеально мягким.", proc_2_title: "Лепка", proc_2_desc: "Каждое изделие лепится вручную, с правильным количеством начинки.", proc_3_title: "Начинка", proc_3_desc: "Используем только свежие продукты, купленные на местных рынках.", proc_4_title: "Приготовление", proc_4_desc: "Варим и жарим в собственном соку, сохраняя все полезные свойства.",
+                reviews_title: "Отзывы", rev_1_text: "Это самые вкусные вареники, что я ела за пределами Украины. Тесто нежное, начинка настоящая. Спасибо вам огромное за ваш труд и любовь к тому, что вы делаете.", rev_1_author: "Елена К.", rev_2_text: "Заказывал пельмени для семейного ужина. Жена сказала, что лучше её бабушкиных не ела. Теперь это наши выходные традиции — заказывать у вас.", rev_2_author: "Андрей М.", rev_3_text: "Чебуреки просто чудесны. Хрустящие, с большим количеством мяса внутри. Доставка очень быстрая, всё прибыло горячим. Рекомендую всем.", rev_3_author: "Мария Л.",
+                faq_title: "Частые вопросы", faq_q1: "Как осуществляется доставка?", faq_a1: "Мы доставляем заказы собственным транспортом непосредственно к вашему дому. Стараемся привозить всё как можно быстрее, чтобы еда осталась тёплой.", faq_q2: "Какая минимальная сумма заказа?", faq_a2: "Минимальная сумма заказа составляет 30 евро. Это позволяет нам покрыть расходы на доставку и сохранить доступные цены на продукцию.", faq_q3: "Куда осуществляется доставка?", faq_q4: "Какая система оплаты?", faq_a4: "Оплата наличными курьеру при получении или переводом на карту. Мы не используем терминалы для карт.",
+                footer_desc: "Домашняя украинская еда, приготовленная вручную с любовью и уважением к традициям.", footer_nav_title: "Навигация", footer_contacts_title: "Контакты", footer_rights: "Все права защищены.",
+                success_msg: "Заказ успешно оформлен! Мы свяжемся с вами в ближайшее время."
             },
             es: {
-                logo: "Cocinamos con amor", nav_home: "Inicio", nav_menu: "Menú", nav_about: "Nosotros", nav_reviews: "Reseñas", nav_contacts: "Contactos", nav_order: "Pedir",
-                hero_title: "Comida casera hecha con amor", hero_opt1: "Hecho a mano", hero_opt2: "Productos naturales", hero_opt3: "Recetas familiares", hero_btn: "Ver el menú",
+                logo: "Cocinamos con amor", nav_home: "Inicio", nav_menu: "Menú", nav_about: "Sobre nosotros", nav_reviews: "Reseñas", nav_contacts: "Contacto", nav_order: "Pedir",
+                hero_title: "Comida casera hecha con amor", hero_opt1: "Hecho a mano", hero_opt2: "Productos naturales", hero_opt3: "Recetas familiares", hero_btn: "Ver menú",
                 menu_title: "Nuestro Menú", menu_subtitle: "Elige tus platos favoritos y te los entregaremos frescos",
-                item_varenyky_title: "Varenyky", opt_potato: "Patata", opt_pot_mush: "Patata + champiñones", opt_pot_liver: "Patata + hígado", opt_cottage: "Queso fresco",
-                item_pelmeni_title: "Pelmeni", opt_pork: "Cerdo", opt_pork_beef: "Cerdo + ternera", opt_chicken: "Pollo",
-                item_holubtsi_title: "Golubtsi", desc_holubtsi: "Golubtsi clásicos con carne y arroz en salsa de tomate.",
-                item_pepper_title: "Pimientos rellenos", desc_pepper: "Pimientos dulces rellenos de carne y arroz.",
-                item_cabbage_title: "Chucrut", desc_cabbage: "Crujiente, natural, sin vinagre. Receta antigua.",
-                item_chebureky_title: "Chebureki", desc_chebureky: "Masa crujiente y fina con relleno de carne jugosa.",
-                item_mlyntsi_title: "Crepes", opt_m_chicken: "Pollo", opt_m_chick_mush: "Pollo + champiñones", opt_m_cottage: "Queso fresco",
+                item_varenyky_title: "Varenyky", item_pelmeni_title: "Pelmeni", item_holubtsi_title: "Holubtsi", item_pepper_title: "Pimiento relleno", item_cabbage_title: "Chucrut", item_chebureky_title: "Chebureki", item_mlyntsi_title: "Crepes", item_syrnyky_title: "Syrnyky", item_kotlety_title: "Chuletas", item_tefteli_title: "Albóndigas",
+                opt_potato: "Patata", opt_pot_mush: "Patata + champiñones", opt_pot_liver: "Patata + hígado", opt_cottage: "Requesón",
+                opt_pork: "Cerdo", opt_pork_beef: "Cerdo + ternera", opt_chicken: "Pollo",
+                opt_m_chicken: "Pollo", opt_m_chick_mush: "Pollo + champiñones", opt_m_cottage: "Requesón",
+                opt_k_chicken: "Pollo", opt_k_pork: "Cerdo",
+                desc_holubtsi: "Holubtsi clásicos con carne y arroz en salsa de tomate.", desc_pepper: "Pimiento dulce relleno de carne y arroz.", desc_cabbage: "Crujiente, natural, sin vinagre. Según una antigua receta.", desc_chebureky: "Masa fina y crujiente con jugoso relleno de carne.", desc_syrnyky: "Syrnyky caseros tiernos de queso de granja. Corteza crujiente, centro suave.", desc_tefteli: "Albóndigas caseras jugosas en salsa de tomate y nata con arroz.",
                 btn_add: "Añadir al carrito",
-                about_title: "Sobre nosotros", about_p1: "Somos una familia ucraniana normal a la que le encanta cocinar. Nuestra historia comenzó con el simple deseo de comer comida casera real, que conocemos desde la infancia. Comida que no se prepara en una fábrica, sino en una cocina de verdad.", about_p2: "Todo lo que ves en el menú lo hacemos con nuestras propias manos. Sin fábricas, sin semiprocesados ni conservantes. Amasamos la masa nosotros mismos, hacemos cada varenyky y cada pelmeni a mano.", about_p3: "Para nosotros no es solo un negocio. Es una forma de compartir el calor de nuestra familia con ustedes. Cocinamos como si fuera para nuestra propia familia, cumpliendo todas las tradiciones que nos transmitieron nuestras madres y abuelas.",
-                process_title: "Cómo cocinamos", process_subtitle: "Cada etapa se hace a mano con especial atención al detalle",
-                proc_1_title: "La masa", proc_1_desc: "Amasamos masa fresca cada mañana para que quede perfectamente suave.", proc_2_title: "El moldeado", proc_2_desc: "Cada pieza se moldea a mano, con la cantidad correcta de relleno.", proc_3_title: "El relleno", proc_3_desc: "Usamos solo productos frescos comprados en mercados locales.", proc_4_title: "La cocción", proc_4_desc: "Hervimos y freímos en su propio jugo, conservando todas las propiedades.",
-                reviews_title: "Reseñas",
-                rev_1_text: "Son los varenyky más ricos que he comido fuera de Ucrania. La masa es suave, el relleno es real. Gracias por su trabajo y amor por lo que hacen.", rev_1_author: "Elena K.",
-                rev_2_text: "Pedí pelmeni para una cena familiar. Mi esposa dijo que no había comido nada mejor, ni siquiera los de su abuela. Ahora es nuestra tradición de fin de semana pedirlos aquí.", rev_2_author: "Andrei M.",
-                rev_3_text: "Los chebureki son maravillosos. Crujientes, con mucha carne dentro. La entrega es muy rápida, todo llega caliente. Se lo recomiendo a todos.", rev_3_author: "Maria L.",
-                faq_title: "Preguntas frecuentes", faq_q1: "¿Cómo se realiza la entrega?", faq_a1: "Entregamos los pedidos con nuestro propio transporte directamente a su puerta. Intentamos traerlo lo más rápido posible para que la comida se mantenga caliente.", faq_q2: "¿Cuál es el pedido mínimo?", faq_a2: "El pedido mínimo es de 30 euros. Esto nos permite cubrir los costos de entrega y mantener precios accesibles.", faq_q3: "¿Se puede pedir con antelación?", faq_a3: "Sí, por supuesto.", faq_q4: "¿Cuál es el método de pago?", faq_a4: "Pago en efectivo al mensajero al recibirlo o transferencia bancaria. No usamos terminales de tarjeta.",
-                cart_title: "Carrito", cart_close: "Cerrar", cart_total: "Total:", cart_checkout: "Realizar pedido", cart_empty: "Tu carrito está vacío",
-                form_title: "Realizar pedido", form_name: "Tu nombre", form_phone: "Teléfono", form_address: "Dirección de entrega", form_comment: "Comentario", form_btn: "Enviar pedido", success_msg: "¡Gracias por su pedido! Nos pondremos en contacto pronto.",
-                footer_desc: "Comida casera ucraniana, preparada a mano con amor y respeto por la tradición.", footer_nav_title: "Navegación", footer_contacts_title: "Contactos", footer_rights: "Todos los derechos reservados."
+                cart_title: "Carrito", cart_empty: "Tu carrito está vacío", cart_total: "Total:", cart_checkout: "Hacer pedido",
+                checkout_title: "Tramitar pedido", form_name: "Tu nombre", form_phone: "Teléfono", form_city: "Ciudad de entrega", form_city_select: "-- O elige una ciudad de la lista --", form_address: "Dirección de entrega", form_comment: "Comentario del pedido", form_submit: "Confirmar pedido",
+                about_title: "Sobre nosotros", about_p1: "Somos una familia ucraniana normal a la que le encanta cocinar. Nuestra historia comenzó con el simple deseo de comer comida casera real, la que conocemos desde la infancia. Comida que no se prepara en una fábrica, sino en una verdadera cocina casera.", about_p2: "Todo lo que ves en el menú lo hacemos con nuestras propias manos. Sin fábricas, sin conservantes ni semielaborados. Nosotros mismos amasamos la masa, nosotros mismos formamos cada varenyk y cada pelmeni.", about_p3: "Para nosotros esto no es solo un negocio. Es una forma de compartir el calor de nuestra familia contigo. Cocinamos como si fuera para nuestra propia familia, manteniendo todas las tradiciones que nos transmitieron nuestras madres y abuelas.",
+                process_title: "Cómo cocinamos", process_subtitle: "Cada paso se realiza a mano con especial atención a los detalles", proc_1_title: "Masa", proc_1_desc: "Preparamos masa fresca cada mañana para que quede perfectamente suave.", proc_2_title: "Formado", proc_2_desc: "Cada pieza se forma a mano, con la cantidad correcta de relleno.", proc_3_title: "Relleno", proc_3_desc: "Utilizamos solo productos frescos comprados en los mercados locales.", proc_4_title: "Cocción", proc_4_desc: "Hervimos y freímos en su propio jugo, conservando todas las propiedades beneficiosas.",
+                reviews_title: "Reseñas", rev_1_text: "Estos son los mejores varenyky que he comido fuera de Ucrania. La masa es tierna, el relleno es auténtico. Muchas gracias por su trabajo y amor por lo que hacen.", rev_1_author: "Olena K.", rev_2_text: "Pedí pelmeni para una cena familiar. Mi esposa dijo que no había probado mejores que los de su abuela. Ahora es nuestra tradición de fin de semana pedirles.", rev_2_author: "Andriy M.", rev_3_text: "Los chebureki son maravillosos. Crujientes, con mucha carne en su interior. La entrega fue muy rápida, todo llegó caliente. Se lo recomiendo a todos.", rev_3_author: "Maria L.",
+                faq_title: "Preguntas frecuentes", faq_q1: "¿Cómo se realiza la entrega?", faq_a1: "Entregamos los pedidos con nuestro propio transporte directamente en su puerta. Intentamos traer todo lo más rápido posible para que la comida permanezca caliente.", faq_q2: "¿Cuál es la cantidad mínima del pedido?", faq_a2: "La cantidad mínima del pedido es de 30 euros. Esto nos permite cubrir los gastos de envío y mantener precios asequibles para los productos.", faq_q3: "¿A dónde se realiza la entrega?", faq_q4: "¿Cuál es el sistema de pago?", faq_a4: "Pago en efectivo al mensajero al recibirlo o transferencia bancaria a la tarjeta. No utilizamos terminales de tarjetas.",
+                footer_desc: "Comida ucraniana casera, hecha a mano con amor y respeto por las tradiciones.", footer_nav_title: "Navegación", footer_contacts_title: "Contactos", footer_rights: "Todos los derechos reservados.",
+                success_msg: "¡Pedido realizado con éxito! Nos pondremos en contacto con usted pronto."
             }
         };
-
-        let currentLang = 'ua';
-
-        function setLanguage(lang) {
-            currentLang = lang;
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            document.querySelectorAll('[data-lang]').forEach(el => {
-                const key = el.getAttribute('data-lang');
-                if (langData[lang][key]) {
-                    el.textContent = langData[lang][key];
-                }
-            });
-            renderCart();
-        }
 
         const menuOptions = {
             varenyky: [
-                { id: 'v1', name_ua: 'Вареники (Картопля)', name_ru: 'Вареники (Картошка)', name_es: 'Varenyky (Patata)', price: 8 },
-                { id: 'v2', name_ua: 'Вареники (Картопля + гриби)', name_ru: 'Вареники (Картошка + грибы)', name_es: 'Varenyky (Patata + champiñones)', price: 10 },
-                { id: 'v3', name_ua: 'Вареники (Картопля + печінка)', name_ru: 'Вареники (Картошка + печень)', name_es: 'Varenyky (Patata + hígado)', price: 10 },
-                { id: 'v4', name_ua: 'Вареники (Творог)', name_ru: 'Вареники (Творог)', name_es: 'Varenyky (Queso)', price: 15 }
+                { key: 'opt_potato', price: 8 },
+                { key: 'opt_pot_mush', price: 10 },
+                { key: 'opt_pot_liver', price: 10 },
+                { key: 'opt_cottage', price: 15 }
             ],
             pelmeni: [
-                { id: 'p1', name_ua: 'Пельмені (Свинина)', name_ru: 'Пельмени (Свинина)', name_es: 'Pelmeni (Cerdo)', price: 10 },
-                { id: 'p2', name_ua: 'Пельмені (Свинина + яловичина)', name_ru: 'Пельмени (Свинина + говядина)', name_es: 'Pelmeni (Cerdo + ternera)', price: 11 },
-                { id: 'p3', name_ua: 'Пельмені (Курка)', name_ru: 'Пельмени (Курица)', name_es: 'Pelmeni (Pollo)', price: 12 }
+                { key: 'opt_pork', price: 10 },
+                { key: 'opt_pork_beef', price: 11 },
+                { key: 'opt_chicken', price: 12 }
             ],
             mlyntsi: [
-                { id: 'm1', name_ua: 'Млинці (Курка)', name_ru: 'Блинчики (Курица)', name_es: 'Crepes (Pollo)', price: 12 },
-                { id: 'm2', name_ua: 'Млинці (Курка + гриби)', name_ru: 'Блинчики (Курица + грибы)', name_es: 'Crepes (Pollo + champiñones)', price: 12 },
-                { id: 'm3', name_ua: 'Млинці (Творог)', name_ru: 'Блинчики (Творог)', name_es: 'Crepes (Queso)', price: 15 }
+                { key: 'opt_m_chicken', price: 12 },
+                { key: 'opt_m_chick_mush', price: 12 },
+                { key: 'opt_m_cottage', price: 15 }
+            ],
+            kotlety: [
+                { key: 'opt_k_chicken', price: 15 },
+                { key: 'opt_k_pork', price: 13 }
             ]
         };
 
-        // Переводы для товаров, добавляемых через quickAdd
-        const quickItemNames = {
-            holubtsi: { ua: 'Голубці', ru: 'Голубцы', es: 'Golubtsi' },
-            pepper: { ua: 'Фарширований перець', ru: 'Фаршированный перец', es: 'Pimientos rellenos' },
-            cabbage: { ua: 'Квашена капуста', ru: 'Квашеная капуста', es: 'Chucrut' },
-            chebureky: { ua: 'Чебуреки', ru: 'Чебуреки', es: 'Chebureki' }
-        };
+        const cityInput = document.getElementById('form-city-input');
+        const citySelect = document.getElementById('form-city-select');
 
-        // Получить название товара на текущем языке по ID
-        function getItemName(id) {
-            // Сначала ищем в menuOptions (вареники, пельмені, млинці)
-            for (const type of Object.values(menuOptions)) {
-                const found = type.find(item => item.id === id);
-                if (found) return found[`name_${currentLang}`];
+        cityInput.addEventListener('input', function() {
+            const val = this.value;
+            for (let option of citySelect.options) {
+                if (option.value === val) { citySelect.value = val; break; }
             }
-            // Затем в quickItemNames (голубці, перець, капуста, чебуреки)
-            if (quickItemNames[id] && quickItemNames[id][currentLang]) {
-                return quickItemNames[id][currentLang];
-            }
-            // Fallback — вернуть сохранённое имя
-            return id;
-        }
-
-        let cart = JSON.parse(localStorage.getItem('familyFoodCart')) || [];
-
-        function saveCart() { localStorage.setItem('familyFoodCart', JSON.stringify(cart)); }
-
-        function openOptionModal(type) {
-            const list = document.getElementById('option-modal-list');
-            const title = document.getElementById('option-modal-title');
-            if (type === 'varenyky') title.textContent = langData[currentLang].item_varenyky_title;
-            else if (type === 'pelmeni') title.textContent = langData[currentLang].item_pelmeni_title;
-            else title.textContent = langData[currentLang].item_mlyntsi_title;
-            list.innerHTML = '';
-            menuOptions[type].forEach(item => {
-                const name = item[`name_${currentLang}`];
-                const div = document.createElement('div');
-                div.className = 'modal-option';
-                div.onclick = function() { addToCart(item.id, item.price); };
-                div.innerHTML = `<span>${name}</span><span>${item.price} €/kg</span>`;
-                list.appendChild(div);
-            });
-            document.getElementById('option-modal').classList.add('open');
-        }
-
-        function closeOptionModal() { document.getElementById('option-modal').classList.remove('open'); }
-        function quickAdd(id, price) { addToCart(id, price); }
-
-        function addToCart(id, price) {
-            const existingItem = cart.find(item => item.id === id);
-            if (existingItem) { existingItem.qty += 1; }
-            else { cart.push({ id, price, qty: 1 }); }
-            saveCart(); renderCart(); closeOptionModal(); openCart();
-        }
-
-        function updateQty(id, delta) {
-            const item = cart.find(i => i.id === id);
-            if (item) { item.qty += delta; if (item.qty <= 0) cart = cart.filter(i => i.id !== id); }
-            saveCart(); renderCart();
-        }
-
-        function renderCart() {
-            const container = document.getElementById('cart-items');
-            const totalPriceEl = document.getElementById('cart-total-price');
-            if (cart.length === 0) {
-                container.innerHTML = `<div class="cart-empty">${langData[currentLang].cart_empty}</div>`;
-                totalPriceEl.textContent = '0 €';
-                return;
-            }
-            let total = 0;
-            container.innerHTML = '';
-            cart.forEach(item => {
-                const name = getItemName(item.id);
-                total += item.price * item.qty;
-                container.innerHTML += `<div class="cart-item"><div class="cart-item-info"><div class="cart-item-name">${name}</div><div class="cart-item-controls"><button class="ctrl-btn" onclick="updateQty('${item.id}', -1)">-</button><span>${item.qty} kg</span><button class="ctrl-btn" onclick="updateQty('${item.id}', 1)">+</button></div></div><div class="cart-item-price">${item.price * item.qty} €</div></div>`;
-            });
-            totalPriceEl.textContent = `${total} €`;
-        }
-
-        function openCart() {
-            document.getElementById('cart-sidebar').classList.add('open');
-            document.getElementById('cart-overlay').classList.add('open');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeCart() {
-            document.getElementById('cart-sidebar').classList.remove('open');
-            document.getElementById('cart-overlay').classList.remove('open');
-            document.body.style.overflow = '';
-        }
-
-        renderCart();
-
-        function openCheckoutModal() {
-            if(cart.length === 0) return;
-            closeCart();
-            document.getElementById('checkout-modal').classList.add('open');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeCheckoutModal() {
-            document.getElementById('checkout-modal').classList.remove('open');
-            document.body.style.overflow = '';
-        }
-
-        function submitOrder(e) {
-            e.preventDefault();
-            const form = document.getElementById('order-form');
-            const inputs = form.querySelectorAll('input, textarea');
-            const name = inputs[0].value.trim();
-            const phone = inputs[1].value.trim();
-            const address = inputs[2].value.trim();
-            const comment = inputs[3].value.trim();
-
-            // Состав заказа и сумма
-            let orderList = '';
-            let total = 0;
-            cart.forEach(item => {
-                const itemName = getItemName(item.id);
-                const sum = item.price * item.qty;
-                total += sum;
-                orderList += `• ${itemName} — ${item.qty} kg — ${sum} €\n`;
-            });
-
-            // Точное время до секунд
-            const now = new Date();
-            const pad = n => String(n).padStart(2, '0');
-            const dateTime = `${pad(now.getDate())}.${pad(now.getMonth() + 1)}.${now.getFullYear()}, ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
-
-            // Формируем сообщение
-            const message =
-                `🆕 НОВЕ ЗАМОВЛЕННЯ\n\n` +
-                `👤 Ім'я: ${name}\n` +
-                `📞 Телефон: ${phone}\n` +
-                `📍 Адреса: ${address}\n` +
-                (comment ? `💬 Коментар: ${comment}\n` : ``) +
-                `\n🛒 Замовлення:\n${orderList}\n` +
-                `💰 Разом: ${total} €\n\n` +
-                `🕐 ${dateTime}`;
-
-            // Отправляем в Telegram
-            const token = '8734491012:AAHHdeu8F1sNpCVmpayMZf6WO0a6W9SvVWU';
-            const chatId = '5898634265';
-            fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ chat_id: chatId, text: message })
-            }).catch(() => {});
-
-            // Закрываем модалку, очищаем корзину
-            closeCheckoutModal();
-            form.reset();
-            cart = [];
-            saveCart();
-            renderCart();
-
-            // Показываем плашку
-            const banner = document.getElementById('success-banner');
-            banner.textContent = langData[currentLang].success_msg;
-            banner.classList.add('show');
-            setTimeout(() => { banner.classList.remove('show'); }, 4000);
-        }
-
-        window.addEventListener('scroll', () => {
-            const heroImg = document.querySelector('.hero-bg img');
-            if(heroImg) { let scrollY = window.scrollY; heroImg.style.transform = `translateY(${scrollY * 0.3}px) scale(1.1)`; }
-            const header = document.getElementById('header');
-            if(window.scrollY > 50) { header.classList.add('scrolled'); } else { header.classList.remove('scrolled'); }
         });
+
+        citySelect.addEventListener('change', function() {
+            cityInput.value = this.value;
+        });
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+            });
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                const key = el.getAttribute('data-lang');
+                if (translations[lang][key]) { el.innerHTML = translations[lang][key]; }
+            });
+            renderCart();
+        }
 
         function toggleBurger() {
             document.getElementById('nav-menu').classList.toggle('open');
             document.getElementById('burger').classList.toggle('active');
             document.getElementById('nav-overlay').classList.toggle('open');
-            document.body.style.overflow = document.getElementById('nav-menu').classList.contains('open') ? 'hidden' : '';
         }
 
         function closeBurger() {
             document.getElementById('nav-menu').classList.remove('open');
             document.getElementById('burger').classList.remove('active');
             document.getElementById('nav-overlay').classList.remove('open');
-            document.body.style.overflow = '';
         }
 
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                closeBurger();
-            });
+        window.addEventListener('scroll', () => {
+            document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
         });
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => closeBurger());
+        });
+
+        function openCart() {
+            document.getElementById('cart-overlay').classList.add('open');
+            document.getElementById('cart-sidebar').classList.add('open');
+            renderCart();
+        }
+
+        function closeCart() {
+            document.getElementById('cart-overlay').classList.remove('open');
+            document.getElementById('cart-sidebar').classList.remove('open');
+        }
+
+        function renderCart() {
+            const itemsContainer = document.getElementById('cart-items');
+            const totalSum = document.getElementById('cart-total-sum');
+            
+            if (cart.length === 0) {
+                itemsContainer.innerHTML = `<div class="cart-empty" data-lang="cart_empty">${translations[currentLang].cart_empty}</div>`;
+                totalSum.textContent = '0 €';
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                total += item.price * item.qty;
+                html += `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-controls">
+                                <button class="ctrl-btn" onclick="changeQty(${index}, -1)">-</button>
+                                <span>${item.qty} кг</span>
+                                <button class="ctrl-btn" onclick="changeQty(${index}, 1)">+</button>
+                            </div>
+                        </div>
+                        <div class="cart-item-price">${item.price * item.qty} €</div>
+                    </div>
+                `;
+            });
+
+            itemsContainer.innerHTML = html;
+            totalSum.textContent = `${total} €`;
+        }
+
+        function addToCart(name, price) {
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) { existingItem.qty++; } 
+            else { cart.push({ name, price, qty: 1 }); }
+            renderCart();
+            openCart();
+        }
+
+        function changeQty(index, delta) {
+            if (cart[index]) {
+                cart[index].qty += delta;
+                if (cart[index].qty <= 0) { cart.splice(index, 1); }
+            }
+            renderCart();
+        }
+
+        function quickAdd(baseKey, price) {
+            const name = translations[currentLang][`item_${baseKey}_title`];
+            addToCart(name, price);
+        }
+
+        function openOptionModal(baseKey) {
+            const modal = document.getElementById('option-modal');
+            const title = document.getElementById('option-modal-title');
+            const body = document.getElementById('option-modal-body');
+            
+            title.textContent = translations[currentLang][`item_${baseKey}_title`];
+            body.innerHTML = '';
+
+            menuOptions[baseKey].forEach(opt => {
+                const div = document.createElement('div');
+                div.className = 'modal-option';
+                div.innerHTML = `<span>${translations[currentLang][opt.key]}</span><span>${opt.price} €/кг</span>`;
+                div.onclick = () => {
+                    const name = `${translations[currentLang][`item_${baseKey}_title`]} (${translations[currentLang][opt.key]})`;
+                    addToCart(name, opt.price);
+                    closeOptionModal();
+                };
+                body.appendChild(div);
+            });
+
+            modal.classList.add('open');
+        }
+
+        function closeOptionModal() { document.getElementById('option-modal').classList.remove('open'); }
+
+        function openCheckoutModal() {
+            if (cart.length === 0) return;
+            closeCart();
+            setTimeout(() => { document.getElementById('checkout-modal').classList.add('open'); }, 300);
+        }
+
+        function closeCheckoutModal() { document.getElementById('checkout-modal').classList.remove('open'); }
+
+        async function submitOrder(e) {
+            e.preventDefault();
+            
+            const cityVal = document.getElementById('form-city-input').value;
+            const validCities = Array.from(document.getElementById('city-list').options).map(o => o.value);
+            
+            if (!validCities.includes(cityVal)) {
+                alert("Будь ласка, оберіть місто зі списку доступних для доставки / Please select a city from the delivery list.");
+                return;
+            }
+
+            let cartText = '';
+            let total = 0;
+            cart.forEach(item => {
+                cartText += `• ${item.name} — ${item.qty} кг — ${item.price * item.qty} €\n`;
+                total += item.price * item.qty;
+            });
+
+            const name = document.getElementById('form-name').value;
+            const phone = document.getElementById('form-phone').value;
+            const city = cityVal;
+            const address = document.getElementById('form-address').value;
+            const comment = document.getElementById('form-comment').value || 'Без коментаря';
+
+            const message = `
+🛒 <b>Нове замовлення!</b>
+
+👤 <b>Клієнт:</b> ${name}
+📱 <b>Телефон:</b> ${phone}
+🏙️ <b>Місто:</b> ${city}
+📍 <b>Адреса:</b> ${address}
+💬 <b>Коментар:</b> ${comment}
+
+📦 <b>Замовлення:</b>
+ ${cartText}
+💰 <b>До сплати:</b> ${total} €
+            `;
+
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Відправка...';
+
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${CONFIG.TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: CONFIG.TELEGRAM_CHAT_ID,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                });
+
+                if (response.ok) {
+                    document.getElementById('checkout-form').reset();
+                    closeCheckoutModal();
+                    cart = [];
+                    
+                    const banner = document.getElementById('success-banner');
+                    banner.textContent = translations[currentLang].success_msg;
+                    banner.classList.add('show');
+                    setTimeout(() => banner.classList.remove('show'), 4000);
+                } else {
+                    alert('Помилка відправки. Спробуйте ще раз або напишіть нам у WhatsApp.');
+                }
+            } catch (error) {
+                alert('Помилка з\'єднання. Перевірте інтернет та спробуйте ще раз.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = translations[currentLang].form_submit;
+            }
+        }
 
         let currentSlide = 0;
         const slider = document.getElementById('reviews-slider');
-        const slides = document.querySelectorAll('.review-card');
+        const totalSlides = slider.children.length;
 
-        function moveSlider(direction) {
-            currentSlide += direction;
-            if (currentSlide < 0) currentSlide = slides.length - 1;
-            if (currentSlide >= slides.length) currentSlide = 0;
+        function moveSlider(dir) {
+            currentSlide += dir;
+            if (currentSlide < 0) currentSlide = totalSlides - 1;
+            if (currentSlide >= totalSlides) currentSlide = 0;
             slider.style.transform = `translateX(-${currentSlide * 100}%)`;
         }
 
-        setInterval(() => moveSlider(1), 8000);
-
-        function toggleFaq(button) {
-            const item = button.parentElement;
+        function toggleFaq(btn) {
+            const item = btn.parentElement;
             const isActive = item.classList.contains('active');
             document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
             if (!isActive) { item.classList.add('active'); }
