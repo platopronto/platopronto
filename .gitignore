@@ -1,0 +1,28 @@
+# =====================
+# Plato Pronto — .gitignore
+# Защита от случайного коммита секретов и лишних файлов
+# =====================
+
+# Файлы с секретами и конфигурацией окружения
+.env
+.env.local
+.env.production
+
+# Файлы которые НЕ должны попасть в репозиторий
+backend/config.js
+backend/secrets.js
+
+# OS файлы
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Редактор
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Временные файлы
+*.tmp
+*.bak
